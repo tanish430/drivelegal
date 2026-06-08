@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+@import "tailwindcss";
+
+body {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* Dark theme variables for Monopo-like hero */
+  --bg: #0b0b0b;
+  --text: #ffffff;
+  --muted: #9aa3ab;
+  --primary: #c9a16b; /* warm gold */
+  --accent: #243b2b; /* deep green */
+  background-color: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Utility to apply primary gradient used on CTAs */
+.btn-gradient {
+  background-image: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+/* Large fullscreen hero with grain/texture approximation */
+.hero-viewport {
+  min-height: 90vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(60% 60% at 30% 40%, rgba(36,59,43,0.65), transparent 20%),
+              radial-gradient(35% 45% at 70% 60%, rgba(201,161,107,0.55), transparent 10%),
+              linear-gradient(180deg, #060606 0%, #0f0d0b 100%);
+  color: var(--text);
+}
+
+/* subtle film grain */
+.hero-viewport::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='noise'><feTurbulence baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23noise)' opacity='0.12'/></svg>");
+  mix-blend-mode: overlay;
+}
+
+.hero-headline {
+  font-size: 5.5rem;
+  line-height: 1;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: -0.02em;
+  padding: 0 20px;
+  color: var(--text);
+  text-shadow: 0 6px 40px rgba(2,4,6,0.6);
+}
+
+.canvas-container {
+  position: absolute;
+  inset: 0;
+}
+
+.canvas-container .gradient {
+  background: radial-gradient(circle at 50% 45%, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.7) 72%, rgba(0, 0, 0, 0.9) 100%);
+}
+
+.sentences {
+  position: relative;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.sentences.is-inview {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sentences ul {
+  position: relative;
+  min-width: min(92vw, 1000px);
+}
+
+.sentences li {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.sentences li.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sentences li.invisible {
+  position: relative;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: none;
+}
+
+/* scroll logo removed */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  backdrop-filter: blur(6px);
+  background: transparent;
+  color: var(--text);
+}
+
+/* Ensure header container uses transparent background so hero is visible behind it */
+.site-header, .site-header > div, .site-header * {
+  background: transparent !important;
+  color: var(--text) !important;
+}
+
+.site-header select {
+  background: rgba(0, 0, 0, 0.45) !important;
+  color: #f8fafc !important;
+}
+
+.site-header select option {
+  background: #f8fafc !important;
+  color: #111827 !important;
+}
+
+.vertical-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: right;
+}
+
+.cookie-box {
+  position: fixed !important;
+  right: 40px !important;
+  bottom: 40px !important;
+  z-index: 2000 !important;
+  background: rgba(10,10,10,0.6);
+  color: #fff;
+  padding: 18px 22px;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+  max-width: 420px;
+}
+
+.cookie-box .btn {
+  background: rgba(255,255,255,0.06);
+  border-radius: 28px;
+  padding: 8px 18px;
+  color: #fff;
+  margin-left: 12px;
+}
+
+.scroll-indicator {
+  position: fixed;
+  left: 36px;
+  bottom: 36px;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.8);
+  transform: rotate(-10deg);
+}
