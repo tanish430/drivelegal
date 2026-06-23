@@ -1,67 +1,191 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@1,400;1,600&family=Space+Grotesk:wght@400;500;600;700&family=Yatra+One&display=swap');
 @import "tailwindcss";
 
 body {
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  /* Dark theme variables for Monopo-like hero */
-  --bg: #0b0b0b;
-  --text: #ffffff;
-  --muted: #9aa3ab;
-  --primary: #c9a16b; /* warm gold */
-  --accent: #243b2b; /* deep green */
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --bg: #f8fafc; /* light slate background */
+  --text: #1e293b; /* dark slate text */
+  --gov-blue: #0b2e59; /* official govt navy blue */
+  --gov-blue-dark: #071d3a;
+  --saffron: #ff9933; /* national saffron */
+  --green: #138808; /* national green */
+  --gold: #c5a059; /* official gold trim */
   background-color: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-/* Utility to apply primary gradient used on CTAs */
-.btn-gradient {
-  background-image: linear-gradient(90deg, var(--primary), var(--accent));
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
-/* Large fullscreen hero with grain/texture approximation */
+/* Leaflet Map GIS Style */
+.leaflet-container {
+  filter: grayscale(10%) contrast(102%) brightness(98%);
+  background-color: #f1f5f9 !important;
+  border-radius: 12px;
+}
+
+/* Tricolor Top Bar */
+.tricolor-bar {
+  height: 6px;
+  background: linear-gradient(90deg, 
+    var(--saffron) 0%, var(--saffron) 33.33%, 
+    #ffffff 33.33%, #ffffff 66.66%, 
+    var(--green) 66.66%, var(--green) 100%
+  );
+  width: 100%;
+}
+
+/* Government Card Styling */
+.gov-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.gov-card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+}
+
+.gov-card-header {
+  background: var(--gov-blue);
+  color: #ffffff;
+  border-bottom: 2px solid var(--saffron);
+}
+
+/* Government Service Badge */
+.gov-badge {
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: rgba(11, 46, 89, 0.08);
+  color: var(--gov-blue);
+  border: 1px solid rgba(11, 46, 89, 0.15);
+}
+
+/* Government Stamp */
+.gov-stamp {
+  border: 2px dashed rgba(19, 136, 8, 0.4);
+  color: var(--green);
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transform: rotate(-3deg);
+  display: inline-block;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Marquee News Ticker */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  color: #334155;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+}
+.marquee-label {
+  background: var(--saffron);
+  color: #ffffff;
+  padding: 4px 12px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  z-index: 10;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  text-transform: uppercase;
+}
+.marquee-text {
+  display: inline-block;
+  animation: marquee-animation 30s linear infinite;
+  padding-left: 100%;
+}
+@keyframes marquee-animation {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* Printable Certificate Styles */
+.certificate-frame {
+  background: #ffffff;
+  border: 12px double var(--gold);
+  outline: 2px solid var(--gov-blue);
+  padding: 30px;
+  position: relative;
+  color: #1e293b;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+.certificate-watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.04;
+  pointer-events: none;
+  width: 280px;
+  height: 280px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%23000080' stroke-width='1.5'/><circle cx='50' cy='50' r='10' fill='none' stroke='%23000080' stroke-width='1'/><path d='M50 10 L50 90 M10 50 L90 50 M21.7 21.7 L78.3 78.3 M21.7 78.3 L78.3 21.7' stroke='%23000080' stroke-width='0.5'/></svg>");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* Original Monopo Hero Styling - Redesigned to fit Government Portal (NIC Dashboard style) */
 .hero-viewport {
-  min-height: 90vh;
+  min-height: 50vh;
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(60% 60% at 30% 40%, rgba(36,59,43,0.65), transparent 20%),
-              radial-gradient(35% 45% at 70% 60%, rgba(201,161,107,0.55), transparent 10%),
-              linear-gradient(180deg, #060606 0%, #0f0d0b 100%);
-  color: var(--text);
+  background: linear-gradient(135deg, var(--gov-blue-dark) 0%, #102a45 100%);
+  color: #ffffff;
+  border-bottom: 4px solid var(--saffron);
 }
 
-/* subtle film grain */
-.hero-viewport::after {
+.hero-viewport::before {
   content: '';
   position: absolute;
   inset: 0;
+  background-image: radial-gradient(circle at 10% 20%, rgba(255, 153, 51, 0.08) 0%, transparent 40%),
+                    radial-gradient(circle at 90% 80%, rgba(19, 136, 8, 0.08) 0%, transparent 40%);
   pointer-events: none;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='noise'><feTurbulence baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23noise)' opacity='0.12'/></svg>");
-  mix-blend-mode: overlay;
-}
-
-.hero-headline {
-  font-size: 5.5rem;
-  line-height: 1;
-  font-weight: 600;
-  text-align: center;
-  letter-spacing: -0.02em;
-  padding: 0 20px;
-  color: var(--text);
-  text-shadow: 0 6px 40px rgba(2,4,6,0.6);
 }
 
 .canvas-container {
   position: absolute;
   inset: 0;
+  opacity: 0.15; /* Subdued lens artwork for modern background pattern */
 }
 
 .canvas-container .gradient {
-  background: radial-gradient(circle at 50% 45%, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.7) 72%, rgba(0, 0, 0, 0.9) 100%);
+  background: radial-gradient(circle at 50% 45%, rgba(7, 29, 58, 0.65) 0%, rgba(7, 29, 58, 0.95) 100%);
 }
 
 .sentences {
@@ -103,72 +227,13 @@ body {
   transform: none;
 }
 
-/* scroll logo removed */
-
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 60;
-  backdrop-filter: blur(6px);
-  background: transparent;
-  color: var(--text);
-}
-
-/* Ensure header container uses transparent background so hero is visible behind it */
-.site-header, .site-header > div, .site-header * {
-  background: transparent !important;
-  color: var(--text) !important;
-}
-
-.site-header select {
-  background: rgba(0, 0, 0, 0.45) !important;
-  color: #f8fafc !important;
-}
-
-.site-header select option {
-  background: #f8fafc !important;
-  color: #111827 !important;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .vertical-nav {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  text-align: right;
-}
-
-.cookie-box {
-  position: fixed !important;
-  right: 40px !important;
-  bottom: 40px !important;
-  z-index: 2000 !important;
-  background: rgba(10,10,10,0.6);
-  color: #fff;
-  padding: 18px 22px;
-  border-radius: 10px;
-  box-shadow: 0 8px 30px rgba(2,6,23,0.6);
-  max-width: 420px;
-}
-
-.cookie-box .btn {
-  background: rgba(255,255,255,0.06);
-  border-radius: 28px;
-  padding: 8px 18px;
-  color: #fff;
-  margin-left: 12px;
-}
-
-.scroll-indicator {
-  position: fixed;
-  left: 36px;
-  bottom: 36px;
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255,255,255,0.8);
-  transform: rotate(-10deg);
+  gap: 12px;
 }

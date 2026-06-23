@@ -94,7 +94,7 @@ export default function Hero({ sentences = fallbackSentences }) {
         }
 
         ctx.drawImage(img, drawX, drawY, drawW, drawH);
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.6)';
+        ctx.fillStyle = 'rgba(7, 29, 58, 0.88)'; // Dark navy overlay for official theme and high text contrast
         ctx.fillRect(0, 0, w, h);
 
         const lensRadius = Math.min(w, h) * 0.2;
